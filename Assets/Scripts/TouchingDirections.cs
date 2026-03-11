@@ -7,13 +7,17 @@ public class TouchingDirections : MonoBehaviour
     public ContactFilter2D castFilter;
     Animator animator;
     CapsuleCollider2D touchingCol;
+
     [SerializeField]
     private bool _isGrounded = true;
+
     [SerializeField]
     private bool _isOnWall = false;
+
     [SerializeField]
     private bool _isOnCeiling = false;
-    private Vector2 wallCheckDirection => gameObject.transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+    private Vector2 wallCheckDirection =>
+        gameObject.transform.localScale.x > 0 ? Vector2.right : Vector2.left;
     RaycastHit2D[] groundHits = new RaycastHit2D[5];
     RaycastHit2D[] wallHits = new RaycastHit2D[5];
     RaycastHit2D[] ceilingHits = new RaycastHit2D[5];
@@ -21,23 +25,18 @@ public class TouchingDirections : MonoBehaviour
     public float wallDistance = 0.2f;
     public float ceilingDistance = 0.05f;
 
-
-    public bool IsGrounded {
-        get
-        {
-            return _isGrounded;
-        } private set
+    public bool IsGrounded
+    {
+        get { return _isGrounded; }
+        private set
         {
             _isGrounded = value;
             animator.SetBool(AnimationStrings.isGrounded, value);
-        } 
+        }
     }
     public bool IsOnWall
     {
-        get
-        {
-            return _isOnWall;
-        }
+        get { return _isOnWall; }
         private set
         {
             _isOnWall = value;
@@ -46,10 +45,7 @@ public class TouchingDirections : MonoBehaviour
     }
     public bool IsOnCeiling
     {
-        get
-        {
-            return _isOnCeiling;
-        }
+        get { return _isOnCeiling; }
         private set
         {
             _isOnCeiling = value;
@@ -62,11 +58,9 @@ public class TouchingDirections : MonoBehaviour
         touchingCol = GetComponent<CapsuleCollider2D>();
         animator = GetComponent<Animator>();
     }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    void Start() { }
 
     private void FixedUpdate()
     {

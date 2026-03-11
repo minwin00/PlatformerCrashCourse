@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
-
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections))]
 public class PlayerController : MonoBehaviour
 {
@@ -15,70 +13,86 @@ public class PlayerController : MonoBehaviour
     Vector2 moveInput;
     TouchingDirections touchingDirections;
 
-    public float CurrentMoveSpeed { get
+    public float CurrentMoveSpeed
+    {
+        get
         {
-            if (IsMoving && !touchingDirections.IsOnWall)
+            if (CanMove)
             {
-                if (touchingDirections.IsGrounded)
+                if (IsMoving && !touchingDirections.IsOnWall)
                 {
-                    if (IsRunning)
+                    if (touchingDirections.IsGrounded)
                     {
-                        return runSpeed;
-                    } else
-                    {
-                        return walkSpeed;
+                        if (IsRunning)
+                        {
+                            return runSpeed;
+                        }
+                        else
+                        {
+                            return walkSpeed;
+                        }
                     }
-                } else
-                {
-                    return airWalkSpeed;
+                    else
+                    {
+                        return airWalkSpeed;
+                    }
                 }
-                
-            } else 
-            {
-                return 0f;
+                else
+                {
+                    return 0f;
+                }
             }
+            else
+                return 0;
         }
     }
 
     [SerializeField]
     private bool _isMoving = false;
-    public bool IsMoving { get
-        {
-            return _isMoving;
-        } private set
+    public bool IsMoving
+    {
+        get { return _isMoving; }
+        private set
         {
             _isMoving = value;
             animator.SetBool(AnimationStrings.isMoving, value);
-        } }
+        }
+    }
 
     [SerializeField]
     private bool _isRunning = false;
-    public bool IsRunning { get
+    public bool IsRunning
+    {
+        get { return _isRunning; }
+        private set
         {
-            return _isRunning;
-        } private set
-        {            
             _isRunning = value;
             animator.SetBool(AnimationStrings.isRunning, value);
-        } }
+        }
+    }
 
     public bool _isFacingRight = true;
-    public bool IsFacingRight {
-        get
-        {
-            return _isFacingRight;
-        } private set
+    public bool IsFacingRight
+    {
+        get { return _isFacingRight; }
+        private set
         {
             if (_isFacingRight != value)
             {
                 transform.localScale *= new Vector2(-1, 1);
-                
             }
             _isFacingRight = value;
-        } }
-    
+        }
+    }
+
+    public bool CanMove
+    {
+        get { return animator.GetBool(AnimationStrings.canMove); }
+    }
+
     Rigidbody2D rb;
     Animator animator;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -112,6 +126,7 @@ public class PlayerController : MonoBehaviour
             IsFacingRight = false;
         }
     }
+
     public void onRun(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -123,15 +138,17 @@ public class PlayerController : MonoBehaviour
             IsRunning = false;
         }
     }
+
     public void onJump(InputAction.CallbackContext context)
     {
         // TODO check if alive as well
-        if (context.started && touchingDirections.IsGrounded)
+        if (context.started && touchingDirections.IsGrounded && CanMove)
         {
             animator.SetTrigger(AnimationStrings.jumpTrigger);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulse);
         }
     }
+
     public void onAttack(InputAction.CallbackContext context)
     {
         if (context.started)
