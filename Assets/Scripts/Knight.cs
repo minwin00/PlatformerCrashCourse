@@ -6,6 +6,9 @@ using UnityEngine;
 public class Knight : MonoBehaviour
 {
     public float walkSpeed = 3f;
+    public float walkStopRate = 0.05f;
+    public DetectionZone attackZone;
+    Animator animator;
 
     Rigidbody2D rb;
     TouchingDirections touchingDirections;
@@ -27,7 +30,8 @@ public class Knight : MonoBehaviour
                 if (value == WalkableDirection.Right)
                 {
                     WalkDirectionVector = Vector2.right;
-                } else if (value == WalkableDirection.Left)
+                }
+                else if (value == WalkableDirection.Left)
                 {
                     WalkDirectionVector = Vector2.left;
                 }
@@ -36,10 +40,30 @@ public class Knight : MonoBehaviour
         }
     }
 
+    public bool _hasTarget = false;
+    public bool HasTarget
+    {
+        get { return _hasTarget; }
+        set
+        {
+            _hasTarget = value;
+            animator.SetBool(AnimationStrings.hasTarget, value);
+        }
+    }
+    public bool CanMove
+    {
+        get { return animator.GetBool(AnimationStrings.canMove); }
+    }
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         touchingDirections = GetComponent<TouchingDirections>();
+        animator = GetComponent<Animator>();
+    }
+
+    void Update()
+    {
+        HasTarget = attackZone.detectedColliders.Count > 0;
     }
 
     private void FixedUpdate()
@@ -48,7 +72,15 @@ public class Knight : MonoBehaviour
         {
             FlipDirection();
         }
-        rb.linearVelocity = new Vector2(walkSpeed * WalkDirectionVector.x, rb.linearVelocity.y);
+        if (CanMove)
+        {
+            rb.linearVelocity = new Vector2(walkSpeed * WalkDirectionVector.x, rb.linearVelocity.y);
+        }
+        else
+        {
+            rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocity.x, 0, walkStopRate), rb.linearVelocity.y);
+        }
+        
     }
 
     private void FlipDirection()
@@ -56,24 +88,15 @@ public class Knight : MonoBehaviour
         if (WalkDirection == WalkableDirection.Right)
         {
             WalkDirection = WalkableDirection.Left;
-        } else if (WalkDirection == WalkableDirection.Left)
+        }
+        else if (WalkDirection == WalkableDirection.Left)
         {
             WalkDirection = WalkableDirection.Right;
-        } else
+        }
+        else
         {
             Debug.LogError("Invalid Walk Direction");
         }
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

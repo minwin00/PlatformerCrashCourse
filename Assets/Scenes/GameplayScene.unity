@@ -5100,6 +5100,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 476875268339889605, guid: 9108314a006ce794b8b59eb277c01718, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2192939435710987936, guid: 9108314a006ce794b8b59eb277c01718, type: 3}
       propertyPath: m_Name
       value: KnightEnemy
