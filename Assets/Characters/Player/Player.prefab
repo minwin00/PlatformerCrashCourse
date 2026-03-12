@@ -137,6 +137,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   walkSpeed: 5
   runSpeed: 8
+  jumpImpulse: 8
+  airWalkSpeed: 4
   _isMoving: 0
   _isRunning: 0
   _isFacingRight: 1
@@ -245,6 +247,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f1e698b5-f34d-4a42-b3ea-cdc2520cdbcb
     m_ActionName: 'Player/Run[/Keyboard/leftShift]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9c7b26c4-7cdc-4c19-bc06-d7b0f9309270
+    m_ActionName: 'Player/Jump[/Keyboard/space]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -286,17 +292,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   castFilter:
     useTriggers: 0
-    useLayerMask: 0
+    useLayerMask: 1
     useDepth: 0
     useOutsideDepth: 0
     useNormalAngle: 0
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 64
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
   _isGrounded: 1
+  _isOnWall: 0
+  _isOnCeiling: 0
   groundDistance: 0.05
+  wallDistance: 0.2
+  ceilingDistance: 0.05
