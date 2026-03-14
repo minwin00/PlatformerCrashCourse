@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections))]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections), typeof(Damagable))]
 public class PlayerController : MonoBehaviour
 {
     public float walkSpeed = 5f;
@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public float airWalkSpeed = 4f;
     Vector2 moveInput;
     TouchingDirections touchingDirections;
+    Damagable damagable;
 
     public float CurrentMoveSpeed
     {
@@ -103,18 +104,19 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         touchingDirections = GetComponent<TouchingDirections>();
+        damagable = GetComponent<Damagable>();
     }
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
+        if (!damagable.LockVelocity)
+            rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
         animator.SetFloat(AnimationStrings.yVelocity, rb.linearVelocity.y);
     }
 
-    public void onMove(InputAction.CallbackContext context)
+    public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-
         if (IsAlive)
         {
             IsMoving = moveInput != Vector2.zero;
@@ -139,7 +141,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void onRun(InputAction.CallbackContext context)
+    public void OnRun(InputAction.CallbackContext context)
     {
         if (context.started)
         {
@@ -151,7 +153,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void onJump(InputAction.CallbackContext context)
+    public void OnJump(InputAction.CallbackContext context)
     {
         // TODO check if alive as well
         if (context.started && touchingDirections.IsGrounded && CanMove)
@@ -161,11 +163,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void onAttack(InputAction.CallbackContext context)
+    public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.started)
         {
             animator.SetTrigger(AnimationStrings.attackTrigger);
         }
+    }
+
+    public void OnHit(int damage, Vector2 knockback)
+    {
+        rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
     }
 }
