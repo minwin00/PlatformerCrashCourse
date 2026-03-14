@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 1643226454769598571}
   - component: {fileID: 7540747675366993841}
   - component: {fileID: 8980494776037512160}
+  - component: {fileID: 2216155907243546227}
   m_Layer: 0
   m_Name: KnightEnemy
   m_TagString: Untagged
@@ -266,6 +267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   walkSpeed: 3
+  walkStopRate: 0.05
   attackZone: {fileID: 6313424716422230068}
   _hasTarget: 0
 --- !u!114 &7540747675366993841
@@ -322,3 +324,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2216155907243546227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2192939435710987936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c327dc37e6c34416b89446be3ec4220e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Damagable
+  _maxHealth: 100
