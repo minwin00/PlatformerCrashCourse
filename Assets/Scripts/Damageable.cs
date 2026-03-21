@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Damagable : MonoBehaviour
+public class Damageable : MonoBehaviour
 {
     public UnityEvent<int, Vector2> damageableHit;
     Animator animator;
@@ -84,6 +84,19 @@ public class Damagable : MonoBehaviour
             LockVelocity = true;
             damageableHit?.Invoke(damage, knockback);
             CharacterEvents.characterDamaged.Invoke(gameObject, damage);
+            return true;
+        }
+        return false;
+    }
+
+    public bool Heal(int healthRestored)
+    {
+        if (IsAlive && Health < MaxHealth)
+        {
+            int maxHeal = Mathf.Max(0, MaxHealth - Health);
+            int actualHeal = Mathf.Min(maxHeal, healthRestored);
+            Health += actualHeal;
+            CharacterEvents.characterHealed.Invoke(gameObject, actualHeal);
             return true;
         }
         return false;

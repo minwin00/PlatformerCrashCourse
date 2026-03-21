@@ -15,14 +15,14 @@ public class Attack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Damagable damagable = collision.GetComponent<Damagable>();
-        if (damagable != null)
+        Damageable damageable = collision.GetComponent<Damageable>();
+        if (damageable != null)
         {
             Vector2 deliveredKnockback =
                 transform.parent.localScale.x > 0
                     ? knockback
                     : new Vector2(-knockback.x, knockback.y);
-            bool gotHit = damagable.Hit(attackDamage, deliveredKnockback);
+            bool gotHit = damageable.Hit(attackDamage, deliveredKnockback);
             if (gotHit)
             {
                 Debug.Log("Hit " + collision.gameObject.name + " for " + attackDamage + " damage.");

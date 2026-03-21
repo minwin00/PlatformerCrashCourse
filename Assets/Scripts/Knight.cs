@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections), typeof(Damagable))]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections), typeof(Damageable))]
 public class Knight : MonoBehaviour
 {
     public float walkSpeed = 3f;
@@ -10,7 +10,7 @@ public class Knight : MonoBehaviour
     public DetectionZone attackZone;
     public DetectionZone cliffDetectionZone;
     Animator animator;
-    Damagable damagable;
+    Damageable damageable;
 
     Rigidbody2D rb;
     TouchingDirections touchingDirections;
@@ -75,7 +75,7 @@ public class Knight : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         touchingDirections = GetComponent<TouchingDirections>();
         animator = GetComponent<Animator>();
-        damagable = GetComponent<Damagable>();
+        damageable = GetComponent<Damageable>();
     }
 
     void Update()
@@ -93,7 +93,7 @@ public class Knight : MonoBehaviour
         {
             FlipDirection();
         }
-        if (!damagable.LockVelocity)
+        if (!damageable.LockVelocity)
         {
             if (CanMove)
                 rb.linearVelocity = new Vector2(

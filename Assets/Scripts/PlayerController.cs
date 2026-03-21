@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections), typeof(Damagable))]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections), typeof(Damageable))]
 public class PlayerController : MonoBehaviour
 {
     public float walkSpeed = 5f;
@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public float airWalkSpeed = 4f;
     Vector2 moveInput;
     TouchingDirections touchingDirections;
-    Damagable damagable;
+    Damageable damageable;
 
     public float CurrentMoveSpeed
     {
@@ -104,12 +104,12 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         touchingDirections = GetComponent<TouchingDirections>();
-        damagable = GetComponent<Damagable>();
+        damageable = GetComponent<Damageable>();
     }
 
     private void FixedUpdate()
     {
-        if (!damagable.LockVelocity)
+        if (!damageable.LockVelocity)
             rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
         animator.SetFloat(AnimationStrings.yVelocity, rb.linearVelocity.y);
     }
