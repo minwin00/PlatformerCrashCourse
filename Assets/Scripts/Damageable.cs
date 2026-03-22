@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class Damageable : MonoBehaviour
 {
     public UnityEvent<int, Vector2> damageableHit;
+    public UnityEvent damageableDeath;
     Animator animator;
 
     private float timeSinceHit = 0f;
@@ -47,6 +48,10 @@ public class Damageable : MonoBehaviour
             _isAlive = value;
             animator.SetBool(AnimationStrings.isAlive, value);
             Debug.Log(gameObject.name + " is alive: " + value);
+
+            if (value == false){
+                damageableDeath?.Invoke();
+            }
         }
     }
 
