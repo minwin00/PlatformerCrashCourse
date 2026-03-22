@@ -70,6 +70,7 @@ public class FlyingEye : MonoBehaviour
         Vector2 directionToWaypoint = (nextWaypoint.position - transform.position).normalized;
         float distance = Vector2.Distance(transform.position, nextWaypoint.position);
         rb.linearVelocity = directionToWaypoint * flightSpeed;
+        UpdateDirection();
         if (distance <= waypointReachedDistance)
         {
             waypointNum++;
@@ -78,6 +79,15 @@ public class FlyingEye : MonoBehaviour
                 waypointNum = 0;
             }
             nextWaypoint = waypoints[waypointNum];
+        }
+    }
+
+    private void UpdateDirection()
+    {
+        Vector3 locScale = transform.localScale;
+        if (transform.localScale.x * rb.linearVelocity.x < 0)
+        {
+            transform.localScale = new Vector3(-locScale.x, locScale.y, locScale.z);
         }
     }
 }
