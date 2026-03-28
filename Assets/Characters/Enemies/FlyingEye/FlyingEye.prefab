@@ -279,7 +279,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  invincibilityTime: 0.25
+  invincibilityTime: 0.1
   isInvincible: 0
   _maxHealth: 50
   _health: 50
