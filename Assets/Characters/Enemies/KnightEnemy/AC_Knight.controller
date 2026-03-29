@@ -47,6 +47,24 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-5341553470730616327
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f12699621d08a46d98b16f1d36d4848f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayOneShotBehavior
+  soundToPlay: {fileID: 8300000, guid: e7e8d8456d3c27f46822f6440ac9aba8, type: 3}
+  volume: 1
+  playOnEnter: 1
+  playOnExit: 0
+  playAfterDelay: 0
+  playDelay: 0.25
 --- !u!1101 &-4282969819604414617
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -89,6 +107,7 @@ AnimatorState:
   m_StateMachineBehaviours:
   - {fileID: -2843159512803637483}
   - {fileID: 4886869262892126908}
+  - {fileID: -5341553470730616327}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -135,6 +154,7 @@ AnimatorState:
   m_StateMachineBehaviours:
   - {fileID: 2923924785632399118}
   - {fileID: 7654449715427752413}
+  - {fileID: 6319135311699621811}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -308,6 +328,24 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 6543593672436629539}
+--- !u!114 &2231708557973028002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f12699621d08a46d98b16f1d36d4848f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayOneShotBehavior
+  soundToPlay: {fileID: 8300000, guid: a779a8d85803269439871781e908d30d, type: 3}
+  volume: 1
+  playOnEnter: 1
+  playOnExit: 0
+  playAfterDelay: 0
+  playDelay: 0.25
 --- !u!1109 &2444367070674781466
 AnimatorTransition:
   m_ObjectHideFlags: 1
@@ -371,6 +409,7 @@ AnimatorState:
   - {fileID: -171890643640662309}
   m_StateMachineBehaviours:
   - {fileID: -8869598859397273663}
+  - {fileID: 2231708557973028002}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -440,6 +479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadeRemove
   fadeTime: 0.5
+  fadeDelay: 0
 --- !u!1109 &5247020972709202747
 AnimatorTransition:
   m_ObjectHideFlags: 1
@@ -460,6 +500,24 @@ AnimatorTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 1
+--- !u!114 &6319135311699621811
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f12699621d08a46d98b16f1d36d4848f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayOneShotBehavior
+  soundToPlay: {fileID: 8300000, guid: e4ad0895e8174b145a07660d334d10d8, type: 3}
+  volume: 1
+  playOnEnter: 1
+  playOnExit: 0
+  playAfterDelay: 0
+  playDelay: 0.25
 --- !u!1102 &6543593672436629539
 AnimatorState:
   serializedVersion: 6
